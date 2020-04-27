@@ -10,12 +10,12 @@ module.exports = function (app) {
     response.sendFile(path.join(__dirname + './public/search.html'));
   });
 
+  app.get('/add', function (request, response) {
+    response.sendFile(path.join(__dirname + './public/add.html'));
+  });
+  app.get('/search', function (request, response) {
+    response.sendFile(path.join(__dirname + './public/search.html'));
+  });
+
 };
 
-
-  // app.get('/add', function (request, response) {
-  //   response.sendFile(path.join(__dirname + '/../public/add.html'));
-  // });
-  // app.get('/search', function (request, response) {
-  //   response.sendFile(path.join(__dirname + '/../public/search.html'));
-  // });
