@@ -1,8 +1,8 @@
 // REQUIREMENTS
 // =========================================================
 var bodyParser = require('body-parser');
-var express = require("express");
-var path = require("path");
+var express = require('express');
+var path = require('path');
 
 var app = express();
 var PORT = 3007;

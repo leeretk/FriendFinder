@@ -7,15 +7,7 @@ module.exports = function (app) {
   });
 
   app.get('/survey', function (request, response) {
-    response.sendFile(path.join(__dirname + './public/search.html'));
-  });
-
-  app.get('/add', function (request, response) {
-    response.sendFile(path.join(__dirname + './public/add.html'));
-  });
-  app.get('/search', function (request, response) {
-    response.sendFile(path.join(__dirname + './public/search.html'));
+    response.sendFile(path.join(__dirname + './public/survey.html'));
   });
 
 };
-

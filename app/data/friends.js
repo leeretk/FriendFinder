@@ -1,6 +1,6 @@
 // DRAGON DATA
 // ===========================================================
-var charactersArray = [
+var friendsArray = [
     {
       routeName: "norwegianridgeback",
       name: "norwegian-ridgeback",
@@ -61,4 +61,4 @@ var charactersArray = [
       scores:  [1,1,3,5,4,5,2,5,1,2]
     }];
 
-    module.exports = charactersArray;
+    module.exports = friendsArray;
