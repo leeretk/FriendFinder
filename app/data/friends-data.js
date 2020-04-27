@@ -1,4 +1,4 @@
-var customerArray = [
+var friendsArray = [
   {
     customerName: "Bill",
     customerID: "bb3k",
@@ -8,5 +8,5 @@ var customerArray = [
   }
 ];
 
-module.exports = customerArray;
+module.exports = friendsArray;
 
