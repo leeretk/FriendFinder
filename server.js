@@ -5,7 +5,7 @@ var express = require('express');
 var path = require('path');
 
 var app = express();
-var PORT = 3007;
+var PORT = 3008;
 
 // SETUP EXPRESS
 // =========================================================

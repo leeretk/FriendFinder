@@ -4,12 +4,9 @@ var surveyData = require('./data/survey-data.js');
 var path = require('path');
 
 module.exports = function (app) {
-
-
+ 
   //GET Survey 
-  app.get("/survey", function (request, result) {
-    result.sendFile(path.join(__dirname + '/../public/survey.html'))
-  });
+
   app.get("/api/:survey?", function (request, result) {
       var matched = request.params.survey;
       if (matched) {
@@ -19,15 +16,17 @@ module.exports = function (app) {
             return result.json(survey[i]);
           }
         }
-        result.send("No Character Found");
+        result.send("Dragon Not Found");
       } else {
         result.json(surveyData);
       };
   });
   //POST Survey Data
   app.post("/api/survey", function (request, result) {
-    return result.json(surveyData)
+     return result.json(surveyData)
   })
+
+  //==========================================================//
 
   //GET Friends (get dragon)
   app.get("/api/friends", function (request, result) {
