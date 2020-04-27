@@ -18,51 +18,51 @@ var characters = [
 {
   routeName: "norwegian-ridgeback",
   photo: "href=/1_norwegian-ridgeback.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores: [3,5,2,3,1,3,1,1,5,2]
 }, {
   routeName: "chinese-fireball",
   photo: "href=/2_chinese-fireball.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores: [5,3,4,1,5,2,5,1,2,2]
 },
 {
   routeName: "ukranian-ironbelly",
   photo: "href=/3_ukranian-ironbelly.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores: [3,2,2,2,2,2,3,1,5,4]
 },
 {
   routeName: "hungarian-horntail",
   photo: "href=/4_hungarian-horntail.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores: [3,2,2,2,2,2,3,1,5,4] 
 },
 {
   routeName: "smaug",
   photo: "href=/5_smaug.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores:  [5,5,5,5,5,2,4,2,2,3]
 },
 {
   routeName: "night-fury",
   photo: "href=/6_night-fury.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores: [2,2,1,2,3,5,4,5,1,5]
 },
 {
   routeName: "puff-magic-dragon",
   photo: "href=/7_puff-magic.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores: [1,1,2,3,3,4,2,4,5,3]
 },
 {
   routeName: "petes-dragon",
   photo: "href=/8_petes-dragon.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores:  [2,1,1,4,4,1,4,4,1,3]
 },
 {
   routeName: "drogon",
   photo: "href=/9_drogon.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores:  [4,5,4,1,1,1,2,4,3,4]
 },
 {
   routeName: "mushu",
   photo: "href=/10_mushu.jpg",
-  scores: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  scores:  [1,1,3,5,4,5,2,5,1,2]
 }];
 
 // Routes
@@ -70,6 +70,15 @@ var characters = [
 app.get("/", function (request, result) {
   result.send("Welcome to the Dragon Friend Finder Page!");
 });
+
+app.get("/home", function(req, res) {
+  res.sendFile(path.join(__dirname, "home.html"));
+})
+
+app.get("/survey", function(req, res) {
+  res.sendFile(path.join(__dirname, "survey.html"));
+})
+
 
 //display characters
 app.get("/api/:characters?", function (request, result) {
@@ -90,6 +99,7 @@ app.get("/api/:characters?", function (request, result) {
           result.json(characters); 
         };
 });
+
 
 // Starts the server to begin listening
 // =========================================================
