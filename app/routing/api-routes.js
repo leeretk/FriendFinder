@@ -3,6 +3,9 @@ var characterData = require('../data/character-data.js');
 var searchData = require('../data/search-data.js');
 var surveyData = require('../data/survey-data.js');
 
+var path = require("path");
+
+
 module.exports = function (app) {
 
   //Display a character
@@ -24,30 +27,6 @@ module.exports = function (app) {
       result.json(characterData);
     };
   });
-
-  //Display friends
-  app.get("/api/friends", function (request, result) {
-    return result.json(friendsData);
-  });
-
-  app.get("/api/:friends?", function (request, result) {
-    var matched = request.params.friends;
-    if (matched) {
-      console.log(matched);
-      for (var i = 0; i < friends.length; i++) {
-        if (matched === friends[i].name) {
-          return result.json(friends[i]);
-        }
-      }
-      result.send("No Character Found");
-    } else {
-      result.json(friendsData);
-    };
-  });
-  app.post("/api/friends", function (request, result) {
-    return result.json(friendsData)
-  });
-
 
   //Display Survey Data
   app.get("/api/survey", function (request, result) {
@@ -71,9 +50,28 @@ module.exports = function (app) {
     return result.json(surveyData)
   })
 
-  app.post("/api/survey", function (request, result) {
-    return result.json(surveyData)
-  })
+  //Display friends
+  app.get("/api/friends", function (request, result) {
+    return result.json(friendsData);
+  });
+
+  app.get("/api/:friends?", function (request, result) {
+    var matched = request.params.friends;
+    if (matched) {
+      console.log(matched);
+      for (var i = 0; i < friends.length; i++) {
+        if (matched === friends[i].name) {
+          return result.json(friends[i]);
+        }
+      }
+      result.send("No Character Found");
+    } else {
+      result.json(friendsData);
+    };
+  });
+  app.post("/api/friends", function (request, result) {
+    return result.json(friendsData)
+  });
 
 //Display Search Data
     app.get("/api/search", function (request, result) {
