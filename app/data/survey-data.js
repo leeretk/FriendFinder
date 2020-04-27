@@ -13,7 +13,7 @@ var surveyArray = [
     q9: "",
     q10: "",
     scoresArray: [],
-    resultPhoto: "",
+    scoreTotal:[],
 }];
 
   module.exports = surveyArray;
