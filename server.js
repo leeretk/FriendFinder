@@ -96,7 +96,6 @@ app.get("/", function (request, result) {
   // result.send("Welcome to the Dragon Friend Finder Page!");
 });
 
-
 // Displays all characters
 app.get("/api/characters", function (request, result) {
   return result.json(characters);
@@ -106,9 +105,7 @@ app.get("/api/characters", function (request, result) {
 app.get("/api/:characters?", function (request, result) {
     
     var matched = request.params.characters;
-
     if(matched) {
-
       console.log(matched);
 
       for (var i = 0; i < characters.length; i++) {
@@ -123,6 +120,9 @@ app.get("/api/:characters?", function (request, result) {
 });
 
 
+
+
+
 // POST ROUTES FRIEND DATA
 // ===========================================================
 // Find out what kind of dragon you are by taking the survey - takes in JSON input
@@ -134,7 +134,6 @@ app.post("/api/new", function(request, result) {
   characters.push(newCharacter);
   result.json(newCharacter);
 });
-
 
 
 // LISTENER
