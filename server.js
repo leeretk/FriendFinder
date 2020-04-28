@@ -5,7 +5,7 @@ var express = require('express');
 var path = require('path');
 
 var app = express();
-var PORT = 3008;
+var PORT = process.env.PORT || 8080;
 
 // SETUP EXPRESS
 // =========================================================

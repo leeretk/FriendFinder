@@ -7,8 +7,7 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matched/1.5.1/matched.jquery.min.js"></script> -->
-  
-  </head>
+</head>
   
   <body>
     <div class="container">
@@ -206,6 +205,8 @@
 
    <script type="text/javascript">
 
+        // var totalScore = parseFloat(q1+q2+q3+q4+q5+q6+q7+q8+q9+q10);
+
       // Capture the form inputs
       $("#submit").on("click", function(data) {
          data.preventDefault();
@@ -223,13 +224,13 @@
               $("#q7").val(),
               $("#q8").val(),
               $("#q9").val(),
-              $("#q10").val()
-            ], 
-            totalScore: [q1+q2+q3+q4+q5+q6+q7+q8+q9+q10],
+              $("#q10").val()], 
+               totalScore: $("#total-score").val().trim(),
           };   
           console.log(newSurvey); 
+          newSurvey.push(newSurvey);
         });    
-
     </script>
-      
-  </body></html>
+     
+  </body>
+  </html>
