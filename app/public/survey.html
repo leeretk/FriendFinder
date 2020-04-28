@@ -1,17 +1,11 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     <title>FriendFinder-Survey</title>
-  
-    <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/matched/1.5.1/matched.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  
-    <!-- Font Awesome Glyphicons -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-  
-    <!-- matched -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/matched/1.5.1/matched.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matched/1.5.1/matched.jquery.min.js"></script>
   
   </head>
@@ -21,7 +15,7 @@
       <div class="jumbotron">
       <h1><i class="fa fa-facebook-square" aria-hidden="true"></i> Survey Questions</h1>
       <hr>
-      <h4>Answer a few basic questions to find out what kind of Dragon you are!</h4>
+      <h3>Answer a few basic questions to find out what kind of Dragon you are!</h3>
       <br>
       <div>
           
@@ -30,47 +24,34 @@
           </button></a>
   
       </div>
-    <!-- ==========ABOUT YOU ========================================= -->
 
-      <h2><strong>About You</strong></h2>
-      <h4>Name (Required)</h4>
-      <input type="text" id="name" class="form-control" required="">
-  
-      <h4>Email (Required)</h4>
-      <input type="email" id="photo" class="form-control" required="">
-  
-      <hr>
-      <!-- ==========QUESTION 1 ========================================= -->
+    <div class='panel-body'>
+          <form action="" method="POST" role="form">
+          <!-- ==========ABOUT YOU ========================================= -->
 
-      <h4><strong>Question 1: You have a Dragon tattoo.</strong></h4>
-            
-      <select class="matched-select" id="q1" required="">
-
-        <option value=""></option>
-        <option value="1">1 (Strongly Disagree)</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5 (Strongly Agree)</option>
-
-      </select>
-<!--       
-      <div class="matched-container matched-container-single" style="width: 157px;" title="" id="q1_matched"><a class="matched-single matched-default"><span>Select an Option</span><div>
+            <h2><strong>About You</strong></h2>
+            <h4>Name (Required)</h4>
+            <input type="text" id="name" class="form-control" required="">
         
-        <b></b></div></a><div class="matched-drop">
-          
-      <div class="matched-search"><input type="text" autocomplete="off">
-        </div>
-          <ul class="matched-results">
-            <li class="active-result" data-option-array-index="1" >1 (Strongly Disagree)</li>
-            <li class="active-result" data-option-array-index="2" >2</li>
-            <li class="active-result" data-option-array-index="3" >3</li>
-            <li class="active-result" data-option-array-index="4" >4</li>
-            <li class="active-result" data-option-array-index="5" >5 (Strongly Agree)</li>
-          </ul>
-        </div>
-      </div> -->
-  
+            <h4>Email (Required)</h4>
+            <input type="email" id="email" class="form-control" required="">
+        
+            <hr>
+            <!-- ==========QUESTION 1 ========================================= -->
+
+          <h4><strong>Question 1: You have a Dragon tattoo.</strong></h4>
+            
+              <select class="form-group" id="q1" required="">
+
+                <option value=""></option>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+
+              </select>
+               
       <!-- ==========QUESTION 2 ========================================= -->
 
       <h4><strong>Question 2: You love hunting. </strong></h4>
@@ -84,8 +65,7 @@
         <option value="4">4</option>
         <option value="5">5 (Strongly Agree)</option>
       </select>
-      <!-- </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q2_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
-
+    
       <!-- ==========QUESTION 3 ========================================= -->
     
       <h4><strong>Question 3: You prefer dark colors.</strong></h4>
@@ -99,8 +79,6 @@
         <option value="4">4</option>
         <option value="5">5 (Strongly Agree)</option>
       </select>
-<!-- 
-      </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q3_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
     
       <!-- ==========QUESTION 4 ========================================= -->
      
@@ -116,11 +94,10 @@
         <option value="4">4</option>
         <option value="5">5 (Strongly Agree)</option>
       </select>
-      <!-- </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q4_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
 
       <!-- ==========QUESTION 5 ========================================= -->
 
-      <h4><strong>Question 5: You are motivated by money and ambitious.</strong></h4>
+      <h4><strong>Question 5: You are motivated by money and ambition.</strong></h4>
 
       <select class="matched-select" id="q5" required="">
 
@@ -131,7 +108,6 @@
         <option value="4">4</option>
         <option value="5">5 (Strongly Agree)</option>
       </select>
-      <!-- style="display: none;"      </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q5_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
 
       <!-- ==========QUESTION 6 ========================================= -->
 
@@ -146,8 +122,6 @@
         <option value="4">4</option>
         <option value="5">5 (Strongly Agree)</option>
       </select>
-        <!-- 
-      </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q6_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
 
       <!-- ==========QUESTION 7 ========================================= -->
       
@@ -162,7 +136,6 @@
         <option value="4">4</option>
         <option value="5">5 (Strongly Agree)</option>
       </select>
-      <!-- </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q7_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
     
       <!-- ==========QUESTION 8 ========================================= -->
 
@@ -178,8 +151,6 @@
         <option value="5">5 (Strongly Agree)</option>
       </select>
 
-      <!-- </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q8_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
-
       <!-- ==========QUESTION 9 ========================================= -->
       
       <h4><strong>Question 9: You prefer free spirited / creative traits in people.</strong></h4>
@@ -193,12 +164,10 @@
         <option value="4">4</option>
         <option value="5">5 (Strongly Agree)</option>
       </select>
-<!-- 
-      </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q9_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
-  
+        
       <!-- ==========QUESTION 10 ========================================= -->
       
-      <h4><strong>Question 10: You prefer to live in the pacific soutwest.</strong></h4>
+      <h4><strong>Question 10: You prefer to live in the pacific southwest.</strong></h4>
 
       <select class="matched-select" id="q10" required="">
 
@@ -210,8 +179,10 @@
         <option value="5">5 (Strongly Agree)</option>
       </select>
 
-        <!-- </select><div class="matched-container matched-container-single" style="width: 157px;" title="" id="q10_matched"><a class="matched-single matched-default"><span>Select an Option</span><div><b></b></div></a><div class="matched-drop"><div class="matched-search"><input type="text" autocomplete="off"></div><ul class="matched-results"></ul></div></div> -->
-  
+    </form>
+
+    </div>
+
       <br>
       <br>
   
@@ -225,86 +196,23 @@
           <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/afhaque/friendfinder">GitHub Repo</a></p>
         </div>
       </footer>
-  
-    </div>
-  
-    <!-- Modal -->
-    <div id="results-modal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-  
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h2 class="modal-title"><strong>Best Match</strong></h4>
-          </div>
-          <div class="modal-body">
-            <h2 id="match-name"></h4>
-            <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-        </div>
-    </div>
- 
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
- 
-      <script type="text/javascript">
-     
-     
-     // matched CSS
-            var config = {
-        ".matched-select": {},
-        ".matched-select-deselect": {
-          allow_single_deselect: true
-        },
-        ".matched-select-no-single": {
-          disable_search_threshold: 10
-        },
-        ".matched-select-no-results": {
-          no_results_text: "Oops, nothing found!"
-        },
-        ".matched-select-width": {
-          width: "95%"
-        }
-      };
-  
-      for (var selector in config) {
-        $(selector).matched(config[selector]);
-      }
-  
+      </div>
+   
+
+    <!-- =========================END HTML ===================================== -->
+    
+    
+    <!-- =============================SCRIPT================================= -->
+
+   <script type="text/javascript">
+
       // Capture the form inputs
-      $("#submit").on("click", function(event) {
-        event.preventDefault();
+      $("#submit").on("click", function(data) {
+         data.preventDefault();
   
-        // Form validation
-        function validateForm() {
-          var isValid = true;
-          $(".form-control").each(function() {
-            if ($(this).val() === "") {
-              console.log(this);
-              isValid = false;
-            }
-          });
-  
-          $(".matched-select").each(function() {
-  
-            if ($(this).val() === "") {
-              isValid = false;
-            }
-          });
-          return isValid;
-        }
-  
-        // If all required fields are filled
-        if (validateForm()) {
-          // Create an object for the user"s data
-          var surveyData = {
-            name: $("#name").val(),
-            email: $("#email").val(),
+          var newSurvey = {
+            name: $("#name").val().trim(),
+            email: $("#email").val().trim(),
             scores: [
               $("#q1").val(),
               $("#q2").val(),
@@ -316,24 +224,12 @@
               $("#q8").val(),
               $("#q9").val(),
               $("#q10").val()
-            ]
-          };
-  
-          // AJAX post the data to the friends API.
-          $.post("/api/survey", surveyData, function(data) {
-  
-            // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-            $("#match-name").text(data.name);
-            $("#match-email").text(data.email);
-  
-            // Show the modal with the best match
-            $("#results-modal").modal("toggle");
-  
-          });
-        } else {
-          alert("Please fill out all fields before submitting!");
-        }
-      });
+            ], 
+            totalScore: [q1+q2+q3+q4+q5+q6+q7+q8+q9+q10],
+          };   
+          console.log(newSurvey); 
+        });    
+
     </script>
       
   </body></html>

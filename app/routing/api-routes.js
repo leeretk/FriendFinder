@@ -57,8 +57,12 @@ module.exports = function (app) {
                 result.json(surveyData); 
               };
       });
-      app.post("/api/friends", function (request, result) {
+      app.post("/api/survey", function (request, result) {
         return result.json(surveyData)
+      });
+      app.post('/api/clear', function() {
+        surveyData = [];
+        console.log("data cleared" + surveyData)
       });
   //================== END SURVEY DATA =====================//
 };
