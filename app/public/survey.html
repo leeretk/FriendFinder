@@ -181,7 +181,6 @@
     </form>
 
     </div>
-
       <br>
       <br>
   
@@ -205,13 +204,11 @@
 
    <script type="text/javascript">
 
-        // var totalScore = parseFloat(q1+q2+q3+q4+q5+q6+q7+q8+q9+q10);
-
       // Capture the form inputs
       $("#submit").on("click", function(data) {
          data.preventDefault();
-  
-          var newSurvey = {
+        
+          $.post("/api/friends", {
             name: $("#name").val().trim(),
             email: $("#email").val().trim(),
             scores: [
@@ -224,11 +221,12 @@
               $("#q7").val(),
               $("#q8").val(),
               $("#q9").val(),
-              $("#q10").val()], 
-               totalScore: $("#total-score").val().trim(),
-          };   
-          console.log(newSurvey); 
-          newSurvey.push(newSurvey);
+              $("#q10").val()]
+          },
+               function(response){
+            console.log("In Survey HTML")  
+            console.log(response);
+          })  // this becomes request.body on api route page.
         });    
     </script>
      
