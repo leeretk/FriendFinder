@@ -194,9 +194,21 @@
       <br>
   
       <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
+      <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"  data-target=""></i>
        Submit</button>
   
+        <!-- modal  -->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h4>Meet Your New BFF</h4>
+            <h5 id="matchScores"></h5>
+            <img id="matchPic" src="" alt="No Image" width = 250px>
+          </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+        </div>
+      </div>
+
       <hr>
       <footer class="footer">
         <div class="container">
@@ -206,58 +218,73 @@
       </div> 
     
     <!-- =============================SCRIPT================================= -->
-
-   <script type="text/javascript">
-
-              var routeName = name.replace(/\s+/g, "").toLowerCase();
-
-              var newFriend = {
-                routeName: routeName,
-                  name: $("#name").val().trim(),
-                  email: $("#email").val().trim(),
-                  scores: [
-                    $("#q1").val(),
-                    $("#q2").val(),
-                    $("#q3").val(),
-                    $("#q4").val(),
-                    $("#q5").val(),
-                    $("#q6").val(),
-                    $("#q7").val(),
-                    $("#q8").val(),
-                    $("#q9").val(),
-                    $("#q10").val(),
-                    $("#total-score").val(),
-                    ]};
-
-          function runSurveyQuery() {
-
-            $.ajax({ url: "/api/friends", method: "GET" })
-            .then(function(newFriend) {
-
-             for (var i = 0; i < newFriend.length; i++) {
-                  console.log(newFriend);
-                  console.log("------------------------------------");
-            };
-          });
-                      
-              $.post("/api/friends", newFriend)
-                .then(function(data) {
-                  console.log("survey", data);
-                  alert("Processing...");
-                });
-            };
-
-          });
-        };
-
-    // Capture the form inputs
-    $("#submit").on("click", function(data) {
-         data.preventDefault();
-            runSurveyQuery();
-        });
     
-      
-    </script>
+      <script type="text/javascript">
 
-  </body>
+          // Capture the form inputs
+          
+          $("#submit").on("click", function(data) {
+                  data.preventDefault();
+                      
+                //form validation//
+                function validateForm() {
+                  var isValid = true;
+                  $("validate").each(function() {
+                    if ($(this).val() === "") {
+                      console.log(this);
+                      console.log("must complete all fields")
+                      isValid = false;
+                  }
+          });
+
+          $("matched").each(function() {           
+              if ($(this).val() === "") 
+              {
+                 isValid = false;
+              }
+              return isValid;
+              });
+
+            //create an object for the user data --> New friend
+            var routeName = name.replace(/\s+/g, "").toLowerCase();
+
+            var newFriend = {
+                    routeName: routeName,
+                      name: $("#name").val().trim(),
+                      email: $("#email").val().trim(),
+                      scores: [
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val(),
+                        $("#q6").val(),
+                        $("#q7").val(),
+                        $("#q8").val(),
+                        $("#q9").val(),
+                        $("#q10").val(),
+                        $("#total-score").val(),
+              ]};
+
+              function runSurveyQuery() {
+
+                $.ajax({ url: "/api/friends", method: "GET" })
+                .then(function(newFriend) {
+
+                for (var i = 0; i < newFriend.length; i++) {
+                      console.log(newFriend);
+                      console.log("------------------------------------");
+                      };
+                          
+                  $.post("/api/friends", newFriend)
+                    .then(function(data) {
+                      console.log("survey", data);
+                      alert("Processing...");
+                    });
+                  });
+                };
+              };
+            }); 
+      </script>
+    </body>
   </html>

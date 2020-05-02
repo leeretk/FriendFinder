@@ -1,64 +1,55 @@
 
 var friends = require('../data/friends.js');
+
 var path = require('path');
 
 module.exports = function (app) {
-
-  app.get("/", function (request, response) {
-    response.sendFile(path.join(__dirname, "../public/home.html"));
-  });
-  app.get("/survey", function (request, response) {
-    response.sendFile(path.join(__dirname, "../public/survey.html"));
-  });
-
   //================== FRIENDS (DRAGONS) API DATA ================//
-  var friendList = require('../data/friend.js');
+      app.get("/", function (request,response) {
+        response.sendFile(path.join(__dirname, "../public/home.html"));
+      });
+      app.get("/survey", function (request, response) {
+        response.sendFile(path.join(__dirname, "../public/survey.html"));
+      });
+  //================== FRIENDS (GET / POST) API DATA ================//
+      app.get("/api/friends", function (request,response) {
+        return response.json(friends);
+      });
+      app.post("/api/friends", function (request,response) {
+          return response.json(friends);
+      });
+  //========== FRIENDS (POST SURVEY RESPONSE ) API DATA ============//
 
-  module.exports = function (app) {
-    //a GET route that displays JSON of all possible friends
-    app.get('/api/friends', function (req, res) {
-      res.json(friendList);
-    });
+      app.post("/api/friends", function ({body}, response) {
+          
+        var surveyInfo = body;
+        
+        console.log(body);
+        console.log(body.scores);
+        console.log(surveyInfo.scores);
 
-    app.post('/api/friends', function (req, res) {
-      //grabs the new friend's scores to compare with friends in friendList array
-      var newFriendScores = req.body.scores;
-      var scoresArray = [];
-      // var friendCount = 0;
-      var bestMatch = 0;
+        var matchIndex = 0;
+        var minDifference = 20; 
 
-      //runs through all current friends in list
-      for (var i = 0; i < friendList.length; i++) {
-        var scoresDiff = 0;
-        //run through scores to compare friends
-        for (var j = 0; j < newFriendScores.length; j++) {
-          scoresDiff += (Math.abs(parseInt(friendList[i].scores[j]) - parseInt(newFriendScores[j])));
+        for(var i = 0; i < friends.length; i++) {
+
+          var totalDifference = 0;
+
+          for(var b = 0; b < friends[i].scores.length; b++) {
+            var difference = Math.abs(surveyInfo.scores[b] - friends[i].scores[b])
+            totalDifference += difference;
+          }
+          if(totalDifference < minDifference) {
+            matchIndex = i;  //keeping track of the friend winning so far.
+            minDifference = totalDifference;  //keep track of the smallest diff between user and friend list.
+          }
         }
+        friends.push(surveyInfo);
+        console.log(friends[matchIndex]);
+        response.json(friends[matchIndex]);
 
-        //push results into scoresArray
-        scoresArray.push(scoresDiff);
-      }
-
-      //after all friends are compared, find best match
-      for (var i = 0; i < scoresArray.length; i++) {
-        if (scoresArray[i] <= scoresArray[bestMatch]) {
-          bestMatch = i;
-        }
-      }
-
-      //return bestMatch data
-      var bff = friendList[bestMatch];
-      res.json(bff);
-
-      //pushes new submission into the friendsList array
-      friendList.push(req.body);
-    });
-  };
-};
   //================== END SURVEY DATA =====================//
-
-  // app.post("/api/clear", function(request, response) {
-  //   surveyInfo.length = 0;
-  //   console.log 
-  //   // response.json({ ok: true });
   // });
+})
+};
+
