@@ -1,5 +1,5 @@
 
-var friendsData = require('../data/friends.js');
+var currentFriend = require('../data/friends.js');
 
 var path = require('path');
 
@@ -12,36 +12,41 @@ module.exports = function (app) {
         response.sendFile(path.join(__dirname, "../public/survey.html"));
       });
   //================== FRIENDS (GET / POST) API DATA ================//
+
     //gets exsiting data  
-      app.get("/api/friends", function (request,response) {
-        return response.json(friendsData);
-      });
-      //post handles incoming data
-      app.post("/api/friends", function (request,response) {
+    app.get("/api/friends", function (request,response) {
+        return response.json(currentFriend);
+    });
+
+    //post handles incoming data
+    app.post("/api/friends", function (request,response) {
          
-        
-          // Parse new friend input to get integers (AJAX post seemed to make the numbers strings)
-          var newFriend = {
+      var newFriend = {
             name: req.body.name,
             email: req.body.email,
             scores: [],
             totalScore: [],
-          };
-          var scoresArray = [];
-          for(var i=0; i < req.body.scores.length; i++){
+      };
+          
+      var scoresArray = [];
+      
+      var totalScore = Math.abs(currentFriend.scores)
+
+
+      for(var i=0; i < req.body.scores.length; i++){
             scoresArray.push( parseInt(req.body.scores[i]) )
           }
           newFriend.scores = scoresArray;
 
           console.log(newFriend);
 
-        var totalScore = Math.abs(surveyInfo.scores)
+        
 
-        var surveyInfo = body;      
+        var newFriend = body;      
         var matchIndex = 0;
         var minDifference = 45;
         
-        console.log(surveyInfo.scores);
+        console.log(newFriend.scores);
         console.log("match index: " + matchIndex)
         console.log(newFriend);
         

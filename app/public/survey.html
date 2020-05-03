@@ -221,14 +221,15 @@
       var allFieldsCompleted;
 
       //check fields//
-      
+
       $(document).ready(function () {
         // Event Listener for Submission
         $('#submit').on('click', function () {
-          alert("button working");
+            alert("button working");
 
-        function checkIfComplete() {
-            if (allFieldsCompleted) {
+      function checkIfComplete() {
+            
+          if (allFieldsCompleted) {
               alert("fields are complete");              
               collectInputs();
               performMatch();
@@ -240,9 +241,10 @@
         }); // end submit listener
       }); // document ready
 
-
       function checkIfComplete(callback) {
+       
         var questionsCompleted;
+
         $('.chosen-select').each(function () {
           if ($(this).val() == "") {
             questionsCompleted = false;
@@ -280,10 +282,10 @@
           }
           callback();
         });
-      }
+      };
      
-      // Collect User input and push 
-      function collectInputs() { 
+      if (checkIfComplete() == true) {
+
           var routeName = name.replace(/\s+/g, "").toLowerCase();
 
           var newFriend = {
@@ -302,44 +304,39 @@
                   $("#q9").val(),
                   $("#q10").val(),
             ],
-            totalScore: []
-      };
+            totalScore: [],
+       };
+
+        var currentURL = window.location.origin;
+
+        //AJAX posts the data to friends API.
+      
+        $.post(currentURL + "/api/friends", newFriend, function(data) {
+                $("#matchName").text(data.name);
+                $("#matchEmail").email(data.email);
+            });
 
 
-  function performMatch() {
-   
-      var scoresArray = [];
-      var totalScore = 0;
+            // Show the modal with the best match
+            $('.modal').modal();
 
-          $('.chosen-select').each(function () {
-            scoresArray.push(parseInt($(this).val())); // Parse As Integer 
-            totalScore.push(Math.parseInt($(this).val("q1"+"q2"+"q3"+"q4"+'q5'+"q6"+"q7"+"q8"+"q9"+"q10")));
-
-          }).promise().done(function () {
-
-              if (newFriend.scores = scoresArray) {
-                
-                $.get(currentURL + "/api/friends", newFriend, function (data) {
-                $('#matchName').text(data.name);
-                $('#matchImage').attr('src', data.photo);
-                  }) 
-             } else if (newFriend.totalScore < totalScore | newFriend.totalScore > totalScore) {
-
-                for (i = 0; i > totalscore, i++) {}
-
-
-                for (i = 0; i > totalscore, i--) {}
-
-
-                $.get(currentURL + "/api/friends", newFriend, function (data) {
-                $('#matchName').text(data.name);
-                $('#matchImage').attr('src', data.photo);
-                  })   
-              
-
-              };
-        });
-      };
+            //clear form after submission
+            $('#name').val("");
+            $('#photo').val("");
+            $('#q1').val("");
+            $('#q2').val("");
+            $('#q3').val("");
+            $('#q4').val("");
+            $('#q5').val("");
+            $('#q6').val("");
+            $('#q7').val("");
+            $('#q8').val("");
+            $('#q9').val("");
+            $('#q10').val("");
+        } else {
+            alert("Please fill out ALL fields before submitting survey!")
+        }         // return false;
+      });
 
     </script>
 

@@ -1,7 +1,7 @@
 // *********************************************************************************
 //DRAGON DATA
 // *********************************************************************************
-var friendsData = [
+var currentFriendsData = [
     {
       routeName: "norwegianridgeback",
       name: "norwegian-ridgeback",
@@ -84,4 +84,4 @@ var friendsData = [
   
   ];
 
-    module.exports = friendsData;
+    module.exports = currentFriendsData;
