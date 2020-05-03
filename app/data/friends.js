@@ -80,6 +80,8 @@ var friendsData = [
       photo: "href= ../assets/images/10_mushu.jpg",
       scores:[1,1,3,5,4,5,2,4,1,2],
       totalScore: 28,
-    }];
+    }
+  
+  ];
 
     module.exports = friendsData;

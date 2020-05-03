@@ -66,7 +66,7 @@
 
           <h4><strong>Question 3: You prefer dark colors.</strong></h4>
           <select class="form-control" id="q3" required="">
-           <option value=""></option>
+            <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -78,7 +78,7 @@
           <!-- ==========QUESTION 4 ========================================= -->
 
           <h4><strong>Question 4: Your favorite superhero is Captain Marvel.</strong></h4>
-         <h4></h4>
+          <h4></h4>
           <select class="form-control" id="q4" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
@@ -184,137 +184,163 @@
     </div>
     <hr>
 
-<!-- ======================= MODAL ======================= -->
-<!-- Modal -->
-<div class="modal fade" id="resultsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- ======================= MODAL ======================= -->
+    <!-- Modal -->
+    <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
 
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    
-    <div class="modal-content">
+      <div class="modal-dialog modal-dialog-centered" role="document">
 
-      <div class="modal-header">
+        <div class="modal-content">
 
-        <h5 class="modal-title">Meet your Dragon!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h2 id='matchName'></h2>
-        <img id="matchImage" src="" alt="Image Not Found" style="max-width: 250px;">
-      </div>
+          <div class="modal-header">
 
-      <div class="modal-footer">
+            <h5 class="modal-title">Meet your Dragon!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h2 id='matchName'></h2>
+            <img id="matchImage" src="" alt="Image Not Found" style="max-width: 250px;">
+          </div>
 
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- ========================SCRIPT==================+==== -->
+    <!-- ========================SCRIPT==================+==== -->
     <script type="text/javascript">
 
-           // Global Variable Declaration (scoping fix)
-           var allFieldsCompleted;
+      // Global Variable Declaration (scoping fix)
+      var allFieldsCompleted;
 
-$(document).ready(function() {
-  // Event Listener for Submission
-  $('#submit').on('click', function() {
-    alert("button working");
-    // Check if all the user fields are completed
-    checkIfComplete(function(){
-            // Proceed with AJAX call if all questions are answered
-      if(allFieldsCompleted){
-        collectInputs();
-        alert("fields are complete");
-      }
-      else{
-        alert('Please complete all fields before submitting!');
-      }
-    }); // end checkIfComplete() callback
-  }); // end submit listener
-}); // document ready
+      $(document).ready(function () {
+        // Event Listener for Submission
+        $('#submit').on('click', function () {
+          alert("button working");
 
-// Function to valid user input
- 
-    function checkIfComplete(callback){
-        // Check through all the questions (i.e. iterate through all of class "chosen-select")
+        function checkIfComplete() {
+            if (allFieldsCompleted) {
+              alert("fields are complete");              collectInputs();
+              performMatch();
+            }
+            else {
+              alert('Please complete all fields before submitting!');
+            }
+          }; // end checkIfComplete() callback
+        }); // end submit listener
+      }); // document ready
+
+      // Function to valid user input
+      function checkIfComplete(callback) {
+        // iterate through all the questions to check if entered
         var questionsCompleted;
-        $('.chosen-select').each(function(){
-          if ( $(this).val() == "" ){
+        $('.chosen-select').each(function () {
+          if ($(this).val() == "") {
             questionsCompleted = false;
           }
-        })
-        // This counters the async behavior of $.each()
-        .promise().done(function(){
-
-          // Check if any questions are incomplete
-          if(questionsCompleted == false){
+        }).promise().done(function () {
+          if (questionsCompleted == false) {
+            allFieldsCompleted = false;
+          } else if ($('#name').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#email').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q1').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q2').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q3').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q4').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q5').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q6').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q7').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q8').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q9').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q10').val().trim() == "") {
             allFieldsCompleted = false;
           }
-
-          // Determine if Name is entered
-          else if( $('#name').val().trim() == "" ){
-            allFieldsCompleted = false;
-          }
-
-          // Determine if Link is entered
-          else if( $('#email').val().trim() == "" ){
-            allFieldsCompleted = false;
-          }
-
-          // Otherwise, the all fields are completed
-          else{
+          else {
             allFieldsCompleted = true;
           }
-
-          // Fire Off Callback (to counter async behavior of $.each)
-          callback();       
+          callback();
         });
       }
+     
+      // Collect User input and push 
+      function collectInputs() { 
+          var routeName = name.replace(/\s+/g, "").toLowerCase();
 
-      //collect user data data --> New friend
-            var routeName = name.replace(/\s+/g, "").toLowerCase();
+          var newFriend = {
+            routeName: routeName,
+            name: $("#name").val().trim(),
+            email: $("#email").val().trim(),
+            scores: [
+                  $("#q1").val(),
+                  $("#q2").val(),
+                  $("#q3").val(),
+                  $("#q4").val(),
+                  $("#q5").val(),
+                  $("#q6").val(),
+                  $("#q7").val(),
+                  $("#q8").val(),
+                  $("#q9").val(),
+                  $("#q10").val(),
+            ],
+            totalScore: []
+      };
 
-            var newFriend = {
-              routeName: routeName,
-              name: $("#name").val().trim(),
-              email: $("#email").val().trim(),
-              scores: [],
-              totalScore: []
-            };
-      // Loop through Questions to get scores
-        var scoresArray = [];
-        
-        $('.chosen-select').each(function(){
-          scoresArray.push( parseInt( $(this).val() ) ); // Parse Input Value as integer
-          })
-         // This counters the async behavior of $.each()
-        .promise().done(function(){
-          
-          // Push the array of scores to the new friend object
-          newFriend.scores = scoresArray;
 
-          // POST the newFriend to the friends.js file and get back the best match
-          var currentURL = window.location.origin;
-          $.post(currentURL + "/api/friends", newFriend, function(data){
+  function performMatch() {
+   
+      var scoresArray = [];
+      var totalScore = 0;
 
-            // Add Best Match attributes to Modal
-            $('#matchName').text(data.name);
-            $('#matchImage').attr('src', data.photo);
-            
-            // Show the modal with the best match 
-            $("#resultsModal").modal('toggle');
+          $('.chosen-select').each(function () {
+            scoresArray.push(parseInt($(this).val())); // Parse As Integer 
+            totalScore.push(Math.parseInt($(this).val("q1"+"q2"+"q3"+"q4"+'q5'+"q6"+"q7"+"q8"+"q9"+"q10")));
 
-          }); // end AJAX POST
+          }).promise().done(function () {
 
+              if (newFriend.scores = scoresArray) {
+                
+                $.get(currentURL + "/api/friends", newFriend, function (data) {
+                $('#matchName').text(data.name);
+                $('#matchImage').attr('src', data.photo);
+                  }) 
+             } else if (newFriend.totalScore < totalScore | newFriend.totalScore > totalScore) {
+
+                for (i = 0; i > totalscore, i++) {}
+
+
+                for (i = 0; i > totalscore, i--) {}
+
+
+                $.get(currentURL + "/api/friends", newFriend, function (data) {
+                $('#matchName').text(data.name);
+                $('#matchImage').attr('src', data.photo);
+                  })   
+              
+
+              };
         });
-
-
+      };
 
     </script>
-</body>
+
+  </body>
 
 </html>
