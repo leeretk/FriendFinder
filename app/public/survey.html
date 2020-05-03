@@ -220,6 +220,8 @@
       // Global Variable Declaration (scoping fix)
       var allFieldsCompleted;
 
+      //check fields//
+      
       $(document).ready(function () {
         // Event Listener for Submission
         $('#submit').on('click', function () {
@@ -227,7 +229,8 @@
 
         function checkIfComplete() {
             if (allFieldsCompleted) {
-              alert("fields are complete");              collectInputs();
+              alert("fields are complete");              
+              collectInputs();
               performMatch();
             }
             else {
@@ -237,9 +240,8 @@
         }); // end submit listener
       }); // document ready
 
-      // Function to valid user input
+
       function checkIfComplete(callback) {
-        // iterate through all the questions to check if entered
         var questionsCompleted;
         $('.chosen-select').each(function () {
           if ($(this).val() == "") {
