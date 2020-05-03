@@ -186,27 +186,23 @@
 
     <!-- ======================= MODAL ======================= -->
     <!-- Modal -->
-    <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="newFriendResults" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
-
       <div class="modal-dialog modal-dialog-centered" role="document">
-
         <div class="modal-content">
-
           <div class="modal-header">
-
             <h5 class="modal-title">Meet your Dragon!</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
+
             <h2 id='matchName'></h2>
             <img id="matchImage" src="" alt="Image Not Found" style="max-width: 250px;">
           </div>
 
           <div class="modal-footer">
-
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
           </div>
@@ -217,129 +213,115 @@
     <!-- ========================SCRIPT==================+==== -->
     <script type="text/javascript">
 
-      // Global Variable Declaration (scoping fix)
-      var allFieldsCompleted;
 
-      //check fields//
+      //1) GET DATA FROM FORM 
+      //2) SEND DATA TO FRIENDS.TXT
+      //3) GET SCORES AND SCORE TOTAL
+      //4) MATCH SCORES 
+      //5) DISPLAY MODAL NAME AND PICTURE OF MATCH
 
-      $(document).ready(function () {
-        // Event Listener for Submission
-        $('#submit').on('click', function () {
-            alert("button working");
 
-      function checkIfComplete() {
-            
-          if (allFieldsCompleted) {
-              alert("fields are complete");              
-              collectInputs();
-              performMatch();
-            }
-            else {
-              alert('Please complete all fields before submitting!');
-            }
-          }; // end checkIfComplete() callback
-        }); // end submit listener
-      }); // document ready
+    //Submit Data (post data to Friends List)
+    // ==========================================
+    $("#submit").on("click", function (event) {
 
-      function checkIfComplete(callback) {
-       
-        var questionsCompleted;
-
-        $('.chosen-select').each(function () {
-          if ($(this).val() == "") {
-            questionsCompleted = false;
-          }
-        }).promise().done(function () {
-          if (questionsCompleted == false) {
-            allFieldsCompleted = false;
-          } else if ($('#name').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#email').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q1').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q2').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q3').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q4').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q5').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q6').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q7').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q8').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q9').val().trim() == "") {
-            allFieldsCompleted = false;
-          } else if ($('#q10').val().trim() == "") {
-            allFieldsCompleted = false;
-          }
-          else {
-            allFieldsCompleted = true;
-          }
-          callback();
-        });
-      };
-     
-      if (checkIfComplete() == true) {
-
-          var routeName = name.replace(/\s+/g, "").toLowerCase();
-
-          var newFriend = {
-            routeName: routeName,
-            name: $("#name").val().trim(),
-            email: $("#email").val().trim(),
-            scores: [
-                  $("#q1").val(),
-                  $("#q2").val(),
-                  $("#q3").val(),
-                  $("#q4").val(),
-                  $("#q5").val(),
-                  $("#q6").val(),
-                  $("#q7").val(),
-                  $("#q8").val(),
-                  $("#q9").val(),
-                  $("#q10").val(),
-            ],
-            totalScore: [],
-       };
-
-        var currentURL = window.location.origin;
-
-        //AJAX posts the data to friends API.
-      
-        $.post(currentURL + "/api/friends", newFriend, function(data) {
-                $("#matchName").text(data.name);
-                $("#matchEmail").email(data.email);
+      function validateForm() {
+            var isValid = true;
+            $('.validate').each(function() {
+                if ($(this).val() === ''){
+                    isValid = false;
+                    console.log("form not validated")
+                }
             });
 
+            $('.browser-default').each(function() {
+                if ($(this).val() === ""){
+                    isValid = false;
+                    console.log("form not validated")
+                }
+            });
+            return isValid;
+            console.log("form validated")
+      }
 
-            // Show the modal with the best match
-            $('.modal').modal();
+      //if true create a new friend
+      if (validateForm() === true) {
+            var routeName = name.replace(/\s+/g, "").toLowerCase();
 
-            //clear form after submission
-            $('#name').val("");
-            $('#photo').val("");
-            $('#q1').val("");
-            $('#q2').val("");
-            $('#q3').val("");
-            $('#q4').val("");
-            $('#q5').val("");
-            $('#q6').val("");
-            $('#q7').val("");
-            $('#q8').val("");
-            $('#q9').val("");
-            $('#q10').val("");
-        } else {
-            alert("Please fill out ALL fields before submitting survey!")
-        }         // return false;
-      });
+            var newFriend = {
+              routeName: routeName,
+              name: $("#name").val().trim(),
+              email: $("#email").val().trim(),
+              scores: [
+                $("#q1").val(),
+                $("#q2").val(),
+                $("#q3").val(),
+                $("#q4").val(),
+                $("#q5").val(),
+                $("#q6").val(),
+                $("#q7").val(),
+                $("#q8").val(),
+                $("#q9").val(),
+                $("#q10").val(),
+              ],
+              totalScore: [],
+            }; //end new friend object 
 
-    </script>
+            $.get("/api/friends", newFriend)
+              .then(function (data) {
+                console.log(data);
+                alert("Adding friend...");
+              });
+            };
+          });
 
+          //clear form after submission
+    // ==========================================
+    function clearFormData() {
+              $('#name').val("");
+              $('#photo').val("");
+              $('#q1').val("");
+              $('#q2').val("");
+              $('#q3').val("");
+              $('#q4').val("");
+              $('#q5').val("");
+              $('#q6').val("");
+              $('#q7').val("");
+              $('#q8').val("");
+              $('#q9').val("");
+              $('#q10').val("");
+    };
+
+    // Run Queries!
+    // ==========================================
+    createNewFriend();
+    clearFormData();
+      </script>
   </body>
-
 </html>
+
+<!-- function getMatch() {
+  // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+    $.ajax({ url: "/api/friends", method: "GET" })
+    .then(function(friendsData) {
+
+      // Here we then log the tableData to console, where it will show up as an object.
+      console.log(friendsData);
+      console.log("------------------------------------");
+
+      // Loop through and display each of the customers
+      for (var i = 0; i < friendsData.length; i++) {
+
+        // Get a reference to the tableList element and populate it with tables
+        var friendMatch = $("#friendMatch");
+
+        // Then display the fields in the HTML (Section Name, Date, URL)
+        var friendItem = $("<li class='list-group-item mt-4'>");
+
+  
+        listItem.append(
+          $("<h2>").text("ID: " + friendMatch[i].name),
+          $("<h2>").img("photo: " + friendMatch[i].photo),
+          );
+
+          friendMatch.append(friendItem); -->

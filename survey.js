@@ -183,6 +183,7 @@ Executable File  232 lines (218 sloc)  10.1 KB
 <!-- Grabs information and sends it to server -->
 <script type="text/javascript">
 $(document).ready(function() {
+  
     $("#submitBtn").on("click", function() {
         //form validation
         function validateForm() {
@@ -409,3 +410,14 @@ $(document).ready(function() {
         });
 
       }
+
+  // var currentURL = window.location.origin;
+  
+  // //Post newFriend Data
+  // $.post(currentURL + "/api/friends", newFriend, function(data) {
+  //    $("#routeName").text(data.name);
+  //    $("#matchName").text(data.name);
+  //    $("#matchEmail").email(data.email);
+  //    $("#matchScores").email(data.scores);
+  //    $("#matchTotalScore").email(data.totalScore);
+  // });
