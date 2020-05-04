@@ -287,10 +287,12 @@
       // Function to collect user input
       function collectInputs() {
 
-        var routeName = name.replace(/\s+/g, "").toLowerCase();
+        // var routeName = name.replace(/\s+/g, "").toLowerCase();
+
+        var totalScore = parseInt(Math.abs("q1" + "q2" + "q3" + "q4" + "q5" +" q6" +"q7"+ "q8" + "q9" + "q10"));
 
          var newFriend = {
-              routeName: routeName,
+              //routeName: routeName,
               name: $("#name").val().trim(),
               email: $("#email").val().trim(),
               scores: [
@@ -305,20 +307,18 @@
                 $("#q9").val(),
                 $("#q10").val(),
               ],
-              totalScore: $("#totalscore").val(),
-
+              totalScore: $("#totalscore").val()
             }; //end new friend object 
 
         var scoresArray = [];
-        var totalScore = Math.abs("q1" + "q2" + "q3" + "q4" + "q5" + "q6" +"q7"+ "q8" + "q9" + "q10");
         
+
 
         $('.chosen-select').each(function () {
           scoresArray.push(parseInt($(this).val())); // Parse Input Value as integer
-          totalScore.push(parseInt($(this).val()));
         }).promise().done(function () {
 
-          // Push the array of scores to the new friend object
+           // Push the array of scores to the new friend object
           newFriend.scores = scoresArray;
 
           console.log(newFriend);
@@ -331,8 +331,7 @@
             $('#matchImage').attr('src', data.photo);
             $("#matchResults").modal('toggle');
           });
-          callback();
-        });// end AJAX POST
+         });// end AJAX POST
       };     
     </script>
 
