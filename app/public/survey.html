@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -38,7 +40,7 @@
           <!-- ==========QUESTION 1 ========================================= -->
 
           <h4><strong>Question 1: You have a Dragon tattoo.</strong></h4>
-          <select class="form-control" id="q1" required="">
+          <select class="form-control" id="q1" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -52,7 +54,7 @@
           <!-- ==========QUESTION 2 ========================================= -->
 
           <h4><strong>Question 2: You love hunting. </strong></h4>
-          <select class="form-control" id="q2" required="">
+          <select class="form-control" id="q2" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -65,7 +67,7 @@
           <!-- ==========QUESTION 3 ========================================= -->
 
           <h4><strong>Question 3: You prefer dark colors.</strong></h4>
-          <select class="form-control" id="q3" required="">
+          <select class="form-control" id="q3" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -79,7 +81,7 @@
 
           <h4><strong>Question 4: Your favorite superhero is Captain Marvel.</strong></h4>
           <h4></h4>
-          <select class="form-control" id="q4" required="">
+          <select class="form-control" id="q4" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -92,7 +94,7 @@
           <!-- ==========QUESTION 5 ========================================= -->
 
           <h4><strong>Question 5: You are motivated by money and ambition.</strong></h4>
-          <select class="form-control" id="q5" required="">
+          <select class="form-control" id="q5" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -105,7 +107,7 @@
           <!-- ==========QUESTION 6 ========================================= -->
 
           <h4><strong>Question 6: When you go to the movies you prefer comedites.</strong></h4>
-          <select class="form-control" id="q6" required="">
+          <select class="form-control" class="chosen-select" id="q6" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -118,7 +120,7 @@
           <!-- ==========QUESTION 7 ========================================= -->
 
           <h4><strong>Question 7: You like detective shows like Sherlock and Law & Order.</strong></h4>
-          <select class="form-control" id="q7" required="">
+          <select class="form-control" id="q7" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -131,7 +133,7 @@
           <!-- ==========QUESTION 8 ========================================= -->
 
           <h4><strong>Question 8: You like the Disney movie Mulan.</strong></h4>
-          <select class="form-control" id="q8" required="">
+          <select class="form-control" id="q8" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -144,7 +146,7 @@
           <!-- ==========QUESTION 9 ========================================= -->
 
           <h4><strong>Question 9: You prefer free spirited / creative traits in people.</strong></h4>
-          <select class="form-control" id="q9" required="">
+          <select class="form-control" id="q9" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -156,7 +158,7 @@
           <!-- ==========QUESTION 10 ========================================= -->
 
           <h4><strong>Question 10: You prefer to live in the pacific southwest.</strong></h4>
-          <select class="form-control" id="q10" required="">
+          <select class="form-control" id="q10" class="chosen-select" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -177,7 +179,7 @@
 
       <footer class="footer">
         <div class="container">
-          <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/afhaque/friendfinder">GitHub
+          <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/leeretk/friendfinder">GitHub
               Repo</a></p>
         </div>
       </footer>
@@ -186,7 +188,7 @@
 
     <!-- ======================= MODAL ======================= -->
     <!-- Modal -->
-    <div class="modal fade" id="newFriendResults" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    <div class="modal fade" id="matchResults" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -213,115 +215,127 @@
     <!-- ========================SCRIPT==================+==== -->
     <script type="text/javascript">
 
-
-      //1) GET DATA FROM FORM 
-      //2) SEND DATA TO FRIENDS.TXT
-      //3) GET SCORES AND SCORE TOTAL
+      //1) SUBMIT DATA FROM FORM 
+      //2) GET SCORES AND SCORE TOTAL
       //4) MATCH SCORES 
       //5) DISPLAY MODAL NAME AND PICTURE OF MATCH
 
+      // ==========================================
+      // Validate fields are completely filled out
+      var allFieldsCompleted;
 
-    //Submit Data (post data to Friends List)
-    // ==========================================
-    $("#submit").on("click", function (event) {
+      $(document).ready(function () {
+        $('#submit').on('click', function () {
+            checkIfComplete(function () {
+            if (allFieldsCompleted) {
+              collectInputs();
+            }
+            else {
+              alert('Please complete all fields before submitting!');
+            }
+          }); 
+        }); 
+      }); // document ready
 
-      function validateForm() {
-            var isValid = true;
-            $('.validate').each(function() {
-                if ($(this).val() === ''){
-                    isValid = false;
-                    console.log("form not validated")
-                }
-            });
-
-            $('.browser-default').each(function() {
-                if ($(this).val() === ""){
-                    isValid = false;
-                    console.log("form not validated")
-                }
-            });
-            return isValid;
-            console.log("form validated")
+      // ==========================================
+      // Function to valid user input (loop through each Question)
+      function checkIfComplete(callback) {
+        var questionsCompleted;
+        $('.chosen-select').each(function () {
+          if ($(this).val() == "") {
+            questionsCompleted = false;
+          }
+        }).promise().done(function () {
+          if ($(this).val() === "") {
+            questionsCompleted = false;
+          }
+        }).promise().done(function () {
+          if (questionsCompleted == false) {
+            allFieldsCompleted = false;
+          } else if ($('#name').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#email').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q1').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q2').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q3').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q4').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q5').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q6').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q7').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q8').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q9').val().trim() == "") {
+            allFieldsCompleted = false;
+          } else if ($('#q10').val().trim() == "") {
+            allFieldsCompleted = false;
+          }
+          else {
+            allFieldsCompleted = true;
+          }
+          callback();
+        });
       }
+      // ==========================================
+      // Function to collect user input
+      function collectInputs() {
 
-      //if true create a new friend
-      if (validateForm() === true) {
-            var routeName = name.replace(/\s+/g, "").toLowerCase();
+        var routeName = name.replace(/\s+/g, "").toLowerCase();
 
-            var newFriend = {
-              routeName: routeName,
-              name: $("#name").val().trim(),
-              email: $("#email").val().trim(),
-              scores: [
-                $("#q1").val(),
-                $("#q2").val(),
-                $("#q3").val(),
-                $("#q4").val(),
-                $("#q5").val(),
-                $("#q6").val(),
-                $("#q7").val(),
-                $("#q8").val(),
-                $("#q9").val(),
-                $("#q10").val(),
-              ],
-              totalScore: [],
-            }; //end new friend object 
+         var newFriend = {
+              routeName: routeName,
+              name: $("#name").val().trim(),
+              email: $("#email").val().trim(),
+              scores: [
+                $("#q1").val(),
+                $("#q2").val(),
+                $("#q3").val(),
+                $("#q4").val(),
+                $("#q5").val(),
+                $("#q6").val(),
+                $("#q7").val(),
+                $("#q8").val(),
+                $("#q9").val(),
+                $("#q10").val(),
+              ],
+              totalScore: $("#totalscore").val(),
 
-            $.get("/api/friends", newFriend)
-              .then(function (data) {
-                console.log(data);
-                alert("Adding friend...");
-              });
-            };
+            }; //end new friend object 
+
+        var scoresArray = [];
+        var totalScore = Math.abs("q1" + "q2" + "q3" + "q4" + "q5" + "q6" +"q7"+ "q8" + "q9" + "q10");
+        
+
+        $('.chosen-select').each(function () {
+          scoresArray.push(parseInt($(this).val())); // Parse Input Value as integer
+          totalScore.push(parseInt($(this).val()));
+        }).promise().done(function () {
+
+          // Push the array of scores to the new friend object
+          newFriend.scores = scoresArray;
+
+          console.log(newFriend);
+
+          // POST the newFriend to the friends.js file and get back the best match
+          var currentURL = window.location.origin;
+          $.post(currentURL + "/api/friends", newFriend, function (data) {
+            // Best Match 
+            $('#matchName').text(data.name);
+            $('#matchImage').attr('src', data.photo);
+            $("#matchResults").modal('toggle');
           });
+          callback();
+        });// end AJAX POST
+      };     
+    </script>
 
-          //clear form after submission
-    // ==========================================
-    function clearFormData() {
-              $('#name').val("");
-              $('#photo').val("");
-              $('#q1').val("");
-              $('#q2').val("");
-              $('#q3').val("");
-              $('#q4').val("");
-              $('#q5').val("");
-              $('#q6').val("");
-              $('#q7').val("");
-              $('#q8').val("");
-              $('#q9').val("");
-              $('#q10').val("");
-    };
+</body>
 
-    // Run Queries!
-    // ==========================================
-    createNewFriend();
-    clearFormData();
-      </script>
-  </body>
 </html>
-
-<!-- function getMatch() {
-  // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-    $.ajax({ url: "/api/friends", method: "GET" })
-    .then(function(friendsData) {
-
-      // Here we then log the tableData to console, where it will show up as an object.
-      console.log(friendsData);
-      console.log("------------------------------------");
-
-      // Loop through and display each of the customers
-      for (var i = 0; i < friendsData.length; i++) {
-
-        // Get a reference to the tableList element and populate it with tables
-        var friendMatch = $("#friendMatch");
-
-        // Then display the fields in the HTML (Section Name, Date, URL)
-        var friendItem = $("<li class='list-group-item mt-4'>");
-
-  
-        listItem.append(
-          $("<h2>").text("ID: " + friendMatch[i].name),
-          $("<h2>").img("photo: " + friendMatch[i].photo),
-          );
-
-          friendMatch.append(friendItem); -->
