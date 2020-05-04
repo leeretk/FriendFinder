@@ -40,7 +40,7 @@
           <!-- ==========QUESTION 1 ========================================= -->
 
           <h4><strong>Question 1: You have a Dragon tattoo.</strong></h4>
-          <select class="form-control" id="q1" class="chosen-select" required="">
+          <select class="form-control" id="q1"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -54,7 +54,7 @@
           <!-- ==========QUESTION 2 ========================================= -->
 
           <h4><strong>Question 2: You love hunting. </strong></h4>
-          <select class="form-control" id="q2" class="chosen-select" required="">
+          <select class="form-control" id="q2"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -67,7 +67,7 @@
           <!-- ==========QUESTION 3 ========================================= -->
 
           <h4><strong>Question 3: You prefer dark colors.</strong></h4>
-          <select class="form-control" id="q3" class="chosen-select" required="">
+          <select class="form-control" id="q3"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -81,7 +81,7 @@
 
           <h4><strong>Question 4: Your favorite superhero is Captain Marvel.</strong></h4>
           <h4></h4>
-          <select class="form-control" id="q4" class="chosen-select" required="">
+          <select class="form-control" id="q4"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -94,7 +94,7 @@
           <!-- ==========QUESTION 5 ========================================= -->
 
           <h4><strong>Question 5: You are motivated by money and ambition.</strong></h4>
-          <select class="form-control" id="q5" class="chosen-select" required="">
+          <select class="form-control" id="q5"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -107,7 +107,7 @@
           <!-- ==========QUESTION 6 ========================================= -->
 
           <h4><strong>Question 6: When you go to the movies you prefer comedites.</strong></h4>
-          <select class="form-control" class="chosen-select" id="q6" required="">
+          <select class="form-control"  id="q6" required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -120,7 +120,7 @@
           <!-- ==========QUESTION 7 ========================================= -->
 
           <h4><strong>Question 7: You like detective shows like Sherlock and Law & Order.</strong></h4>
-          <select class="form-control" id="q7" class="chosen-select" required="">
+          <select class="form-control" id="q7"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -133,7 +133,7 @@
           <!-- ==========QUESTION 8 ========================================= -->
 
           <h4><strong>Question 8: You like the Disney movie Mulan.</strong></h4>
-          <select class="form-control" id="q8" class="chosen-select" required="">
+          <select class="form-control" id="q8"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -146,7 +146,7 @@
           <!-- ==========QUESTION 9 ========================================= -->
 
           <h4><strong>Question 9: You prefer free spirited / creative traits in people.</strong></h4>
-          <select class="form-control" id="q9" class="chosen-select" required="">
+          <select class="form-control" id="q9"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -158,7 +158,7 @@
           <!-- ==========QUESTION 10 ========================================= -->
 
           <h4><strong>Question 10: You prefer to live in the pacific southwest.</strong></h4>
-          <select class="form-control" id="q10" class="chosen-select" required="">
+          <select class="form-control" id="q10"  required="">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -226,7 +226,7 @@
 
       $(document).ready(function () {
         $('#submit').on('click', function () {
-            checkIfComplete(function () {
+            validateUserInput(function () {
             if (allFieldsCompleted) {
               collectInputs();
             }
@@ -239,7 +239,7 @@
 
       // ==========================================
       // Function to valid user input (loop through each Question)
-      function checkIfComplete(callback) {
+      function validateUserInput(callback) {
         var questionsCompleted;
         $('.chosen-select').each(function () {
           if ($(this).val() == "") {
@@ -287,16 +287,12 @@
       // Function to collect user input
       function collectInputs() {
 
-        // var routeName = name.replace(/\s+/g, "").toLowerCase();
-
-        var totalScore = parseInt(Math.abs("q1" + "q2" + "q3" + "q4" + "q5" +" q6" +"q7"+ "q8" + "q9" + "q10"));
-
          var newFriend = {
               //routeName: routeName,
               name: $("#name").val().trim(),
               email: $("#email").val().trim(),
-              scores: [
-                $("#q1").val(),
+              scores: [  
+                $("#q1").val(),
                 $("#q2").val(),
                 $("#q3").val(),
                 $("#q4").val(),
@@ -305,36 +301,44 @@
                 $("#q7").val(),
                 $("#q8").val(),
                 $("#q9").val(),
-                $("#q10").val(),
-              ],
-              totalScore: $("#totalscore").val()
+                $("#q10").val() 
+              ],
+              totalScore: $("#total-score").val(),
             }; //end new friend object 
 
-        var scoresArray = [];
-        
 
+            console.log(newFriend);
 
-        $('.chosen-select').each(function () {
-          scoresArray.push(parseInt($(this).val())); // Parse Input Value as integer
-        }).promise().done(function () {
-
-           // Push the array of scores to the new friend object
-          newFriend.scores = scoresArray;
-
-          console.log(newFriend);
-
+          // ==========================================
           // POST the newFriend to the friends.js file and get back the best match
           var currentURL = window.location.origin;
+          
           $.post(currentURL + "/api/friends", newFriend, function (data) {
             // Best Match 
             $('#matchName').text(data.name);
             $('#matchImage').attr('src', data.photo);
             $("#matchResults").modal('toggle');
-          });
          });// end AJAX POST
       };     
+      
     </script>
 
 </body>
 
 </html>
+
+
+<!--  // var routeName = name.replace(/\s+/g, "").toLowerCase();
+      // var totalScore = parseInt(Math.abs("q1" + "q2" + "q3" + "q4" + "q5" +" q6" +"q7"+ "q8" + "q9" + "q10"));
+      // totalScore: $("#totalscore").val()
+      var scoresArray = [];
+                 
+            // var scoresArray = [];
+            // scoresArray.push(parseInt($(this).val())); // Parse Input Value as integer
+
+            // newFriend.scores = scoresArray
+        $('.chosen-select').each(function () {
+          scoresArray.push(parseInt($(this).val())); // Parse Input Value as integer
+        }).promise().done(function () {
+
+          newFriend.scores = scoresArray; -->
