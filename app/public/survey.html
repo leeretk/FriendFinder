@@ -292,28 +292,30 @@
               name: $("#name").val().trim(),
               email: $("#email").val().trim(),
               scores: [  
-                $("#q1").val(),
-                $("#q2").val(),
-                $("#q3").val(),
-                $("#q4").val(),
-                $("#q5").val(),
-                $("#q6").val(),
-                $("#q7").val(),
-                $("#q8").val(),
-                $("#q9").val(),
-                $("#q10").val() 
+                $("#q1").val().indexOf(0),
+                $("#q2").val().indexOf(0),
+                $("#q3").val().indexOf(0),
+                $("#q4").val().indexOf(0),
+                $("#q5").val().indexOf(0),
+                $("#q6").val().indexOf(0),
+                $("#q7").val().indexOf(0),
+                $("#q8").val().indexOf(0),
+                $("#q9").val().indexOf(0),
+                $("#q10").val().indexOf(0) 
               ],
               totalScore: $("#total-score").val(),
             }; //end new friend object 
 
-
-            console.log(newFriend);
+            // console.log(newFriend);
 
           // ==========================================
           // POST the newFriend to the friends.js file and get back the best match
-          var currentURL = window.location.origin;
+          // var currentURL = window.location.origin;
           
-          $.post(currentURL + "/api/friends", newFriend, function (data) {
+          alert(JSON.stringify(newFriend));
+
+          $.post("/api/friends", newFriend, function (data) {
+            alert(data);
             // Best Match 
             $('#matchName').text(data.name);
             $('#matchImage').attr('src', data.photo);
