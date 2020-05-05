@@ -1,3 +1,6 @@
+
+var http = require("http");
+
 // Link in Friends Data
 var friendsData = require('../data/friends.js');
 

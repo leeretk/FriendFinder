@@ -5,6 +5,7 @@
   <title>FriendFinder-Survey</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="assets\css\style.css">
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -201,7 +202,7 @@
           <div class="modal-body">
 
             <h2 id='matchName'></h2>
-            <img id="matchImage" src="" alt="Image Not Found" style="max-width: 250px;">
+            <img id="matchImage" src="" alt="Image Not Found">
           </div>
 
           <div class="modal-footer">
@@ -237,7 +238,6 @@
           }); 
         }); 
       
-
       // ==========================================
       // Function to valid user input (loop through each Question)
       function validateUserInput(callback) {
@@ -289,7 +289,6 @@
       function collectInputs() {
         console.log("collect inputs started");
          var newFriend = {
-              //routeName: routeName,
               name: $("#name").val().trim(),
               email: $("#email").val().trim(),
               scores: [  
@@ -304,14 +303,11 @@
                 $("#q9").val(),
                 $("#q10").val() 
               ],
-              totalScore: $("#total-score").val(),
             }; //end new friend object 
 
             console.log(newFriend);
 
           $.post("/api/friends", newFriend, function (data) {
-            console.log("im posting");
-            alert(data);
             // Best Match 
             $('#matchName').text(data.name);
             $('#matchImage').attr('src', data.photo);
@@ -324,19 +320,3 @@
 </body>
 
 </html>
-
-
-<!--  // var routeName = name.replace(/\s+/g, "").toLowerCase();
-      // var totalScore = parseInt(Math.abs("q1" + "q2" + "q3" + "q4" + "q5" +" q6" +"q7"+ "q8" + "q9" + "q10"));
-      // totalScore: $("#totalscore").val()
-      var scoresArray = [];
-                 
-            // var scoresArray = [];
-            // scoresArray.push(parseInt($(this).val())); // Parse Input Value as integer
-
-            // newFriend.scores = scoresArray
-        $('.chosen-select').each(function () {
-          scoresArray.push(parseInt($(this).val())); // Parse Input Value as integer
-        }).promise().done(function () {
-
-          newFriend.scores = scoresArray; -->
