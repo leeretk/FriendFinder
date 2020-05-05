@@ -225,7 +225,8 @@
       var allFieldsCompleted;
 
       $(document).ready(function () {
-        $('#submit').on('click', function () {
+        $('#submit').on('click', function (event) {
+            event.preventDefault(),
             validateUserInput(function () {
             if (allFieldsCompleted) {
               collectInputs();
@@ -235,7 +236,7 @@
             }
           }); 
         }); 
-      }); // document ready
+      
 
       // ==========================================
       // Function to valid user input (loop through each Question)
@@ -286,35 +287,30 @@
       // ==========================================
       // Function to collect user input
       function collectInputs() {
-
+        console.log("collect inputs started");
          var newFriend = {
               //routeName: routeName,
               name: $("#name").val().trim(),
               email: $("#email").val().trim(),
               scores: [  
-                $("#q1").val().indexOf(0),
-                $("#q2").val().indexOf(0),
-                $("#q3").val().indexOf(0),
-                $("#q4").val().indexOf(0),
-                $("#q5").val().indexOf(0),
-                $("#q6").val().indexOf(0),
-                $("#q7").val().indexOf(0),
-                $("#q8").val().indexOf(0),
-                $("#q9").val().indexOf(0),
-                $("#q10").val().indexOf(0) 
+                $("#q1").val(),
+                $("#q2").val(),
+                $("#q3").val(),
+                $("#q4").val(),
+                $("#q5").val(),
+                $("#q6").val(),
+                $("#q7").val(),
+                $("#q8").val(),
+                $("#q9").val(),
+                $("#q10").val() 
               ],
               totalScore: $("#total-score").val(),
             }; //end new friend object 
 
-            // console.log(newFriend);
-
-          // ==========================================
-          // POST the newFriend to the friends.js file and get back the best match
-          // var currentURL = window.location.origin;
-          
-          alert(JSON.stringify(newFriend));
+            console.log(newFriend);
 
           $.post("/api/friends", newFriend, function (data) {
+            console.log("im posting");
             alert(data);
             // Best Match 
             $('#matchName').text(data.name);
@@ -322,7 +318,7 @@
             $("#matchResults").modal('toggle');
          });// end AJAX POST
       };     
-      
+    }); // document ready
     </script>
 
 </body>

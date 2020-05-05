@@ -8,60 +8,44 @@ function apiRoutes(app) {
   app.get('/api/friends', function (request, response) {
     response.json(friendsData);
   });
-
-  app.post('/api/friends', function (request, response) {
-    console.log(request.body);
-    // Parse new friend input to get integers (AJAX post seemed to make the numbers strings)
-    var newFriend = {
-      name: request.body.name,
-      photo: request.body.photo,
-      scores: []
+  
+  app.post("/api/friends", function(req, res) {
+    var bestMatch = {
+      name: "",
+      email: "",
+      friendDifference: Infinity
     };
-
-    var scoresArray = [];
-    for(var i=0; i < request.body.scores.length; i++){
-      scoresArray.push( parseInt(request.body.scores[i]) )
-    }
-    newFriend.scores = scoresArray;
-
-    console.log(newFriend);
-    console.log(newFriend.scores);
-
-    // Cross check the new friend entry with the existing ones
-    var scoreComparisionArray = [];
-    for(var i=0; i < friendsData.length; i++){
-
-      // Check each friend's scores and sum difference in points
-      var currentComparison = 0;
-
-      for(var j=0; j < newFriend.scores.length; j++){
-        currentComparison += Math.abs( newFriend.scores[j] - friendsData[i].scores[j] );
+    // Here we take the result of the user"s survey POST and parse it.
+    var userData = req.body;
+    var userScores = userData.scores;
+    // This variable will calculate the difference between the user"s scores and the scores of
+    // each user in the database
+    var totalDifference;
+    // Here we loop through all the friend possibilities in the database.
+    for (var i = 0; i < friendsData.length; i++) {
+      var currentFriend = friendsData[i];
+      totalDifference = 0;
+      console.log(currentFriend.name);
+      // We then loop through all the scores of each friend
+      for (var j = 0; j < currentFriend.scores.length; j++) {
+        var currentFriendScore = currentFriend.scores[j];
+        var currentUserScore = userScores[j];
+        // We calculate the difference between the scores and sum them into the totalDifference
+        totalDifference += Math.abs(parseInt(currentUserScore) - parseInt(currentFriendScore));
       }
-
-      // Push each comparison between friends to array
-      scoreComparisionArray.push(currentComparison);
-    }
-
-    // Determine the best match using the postion of best match in the friendsData array
-
-    var bestMatchPosition = 0; // assume its the first person to start
-    
-    for(var i=1; i < scoreComparisionArray.length; i++){
-      
-      // Lower number in comparison difference means better match
-      if(scoreComparisionArray[i] <= scoreComparisionArray[bestMatchPosition]){
-        bestMatchPosition = i;
+      // If the sum of differences is less then the differences of the current "best match"
+      if (totalDifference <= bestMatch.friendDifference) {
+        // Reset the bestMatch to be the new friend.
+        bestMatch.name = currentFriend.name;
+        bestMatch.photo = currentFriend.photo;
+        bestMatch.friendDifference = totalDifference;
       }
     }
-
-    // ***NOTE*** If the 2 friends have the same comparison, then the NEWEST entry in the friendsData array is chosen
-    var bestFriendMatch = friendsData[bestMatchPosition];
-
-    // Reply with a JSON object of the best match
-    res.json(bestFriendMatch);
-
-    // Push the new friend to the friends data array for storage
-    friendsData.push(newFriend);
+    // Finally save the user's data to the database (this has to happen AFTER the check. otherwise,
+    // the database will always return that the user is the user's best friend).
+    friendsData.push(userData);
+    // Return a JSON with the user's bestMatch. This will be used by the HTML in the next page
+    res.json(bestMatch);
   });
 }
 
