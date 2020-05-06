@@ -11,6 +11,7 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
+app.use(express.static("public"));
 
 // SETUP EXPRESS
 // =========================================================
