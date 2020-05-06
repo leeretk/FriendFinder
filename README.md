@@ -2,7 +2,11 @@
 
 Friend Finder
 
+-[] https://github.com/leeretk/FriendFinder/blob/master/assets/images/friendfinderDragon.JPG
+
+
 This friend finder app lets the user answer a few questions to find their DRAGON match. 
+
 
 
 - [] https://friend-find-kamy.herokuapp.com/
@@ -67,3 +71,8 @@ Playful, guardian, loyal, mischevious. https://www.google.com/imgres?imgurl=http
 
 Protector, friend, loyal, lethal. Well literally, "Dracarys" means "Dragonfire" in High Valyrian. It's the word Dany uses to signal to her dragon, Drogon, that she wants him to go all evil-fire-destruction up in this bish. https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.geek.com%2Ftech%2Fthe-origin-of-the-species-dragons-1661702%2F&psig=AOvVaw1quEqFWYXZVq4c1BvNtbzt&ust=1587908976358000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJiO8YDjg-kCFQAAAAAdAAAAABAR
 
+
+
+The survey is designed to determine if the user has any of the related Dragon characteristics. 
+
+- [] https://github.com/leeretk/FriendFinder/blob/master/assets/images/survey.JPG
