@@ -1,19 +1,16 @@
 # FriendFinder
 
-Friend Finder
-
--[](https://github.com/leeretk/FriendFinder/blob/master/assets/images/friendfinderDragon.JPG)
+![](https://github.com/leeretk/FriendFinder/blob/master/assets/images/friendfinderDragon.JPG)
 
 
 This friend finder app lets the user answer a few questions to find their DRAGON match. 
-
 
 
 -[] https://friend-find-kamy.herokuapp.com/
 -[] https://github.com/leeretk/FriendFinder/tree/master
 -[] https://github.com/leeretk
 
-Dragons 
+## Dragons
 
 ## Mushu 
 ![](https://github.com/leeretk/FriendFinder/blob/master/assets/images/10_mushu.jpg)
