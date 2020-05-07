@@ -206,6 +206,7 @@
 
             <h2 id='matchName'></h2>
             <img id="matchImage" src="" alt="No Image Found">
+            <h5 id='matchDescription'></h5>
 
           </div>
 
@@ -315,6 +316,7 @@
             // Best Match 
             $('#matchName').text(data.name);
             $('#matchImage').attr('src', data.photo);
+            $('#matchDescription').text(data.description);
             $("#matchResults").modal('toggle');
          });// end AJAX POST
       };     

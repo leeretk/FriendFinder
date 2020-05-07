@@ -29,6 +29,7 @@ function apiRoutes(app) {
       var currentFriend = friendsData[i];
       totalDifference = 0;
       console.log(currentFriend.name);
+      console.log(currentFriend.description);
       // We then loop through all the scores of each friend
       for (var j = 0; j < currentFriend.scores.length; j++) {
         var currentFriendScore = currentFriend.scores[j];
@@ -41,6 +42,7 @@ function apiRoutes(app) {
         // Reset the bestMatch to be the new friend.
         bestMatch.name = currentFriend.name;
         bestMatch.photo = currentFriend.photo;
+        bestMatch.description = currentFriend.description;
         bestMatch.friendDifference = totalDifference;
       }
     }
